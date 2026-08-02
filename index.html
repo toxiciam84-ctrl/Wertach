@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <header class="site-header">
+  <header class="site-header on-hero">
     <div class="container nav-bar">
       <a class="brand" href="index.html">
         <span class="brand-name">Wertacher Mühle</span>
@@ -32,7 +32,8 @@
 
   <main>
 
-    <section class="hero">
+    <section class="hero-full">
+      <img class="bg" src="images/hero-muehle-abend.jpg" alt="Die Wertacher Mühle am Abend, dahinter Wiesen und die Allgäuer Berge">
       <div class="container">
         <h1>Die Wertacher Mühle im&nbsp;Allgäu</h1>
         <div class="hero-meta">
@@ -41,14 +42,11 @@
           <span>Erstmals erwähnt 1424</span>
         </div>
       </div>
-      <figure class="full-photo tall edge">
-        <img src="images/hero-muehle-abend.jpg" alt="Die Wertacher Mühle am Abend, dahinter Wiesen und die Allgäuer Berge">
-      </figure>
     </section>
 
     <section class="block">
       <div class="container two-col">
-        <div>
+        <div class="reveal">
           <div class="kicker-row">
             <span class="no">01</span>
             <span class="label">Die Mühle</span>
@@ -67,20 +65,43 @@
           </p>
           <a class="btn-line" href="hausbesichtigung.html">Das Haus ansehen</a>
         </div>
-        <figure>
-          <img class="crop-top" src="images/muehle-vogelperspektive.jpg" alt="Die Mühle von oben, mitten im Wald" loading="lazy">
+        <figure class="reveal">
+          <span><img class="crop-top" src="images/muehle-vogelperspektive.jpg" alt="Die Mühle von oben, mitten im Wald" loading="lazy"></span>
           <figcaption>Alleinstehend zwischen Wald und Wiesen</figcaption>
         </figure>
       </div>
     </section>
 
+    <section class="band-dark stats-band block">
+      <div class="container">
+        <div class="grid reveal">
+          <div class="stat">
+            <div class="num">1424</div>
+            <div class="desc">Erste Erwähnung</div>
+          </div>
+          <div class="stat">
+            <div class="num">1000&thinsp;m</div>
+            <div class="desc">Höhenlage</div>
+          </div>
+          <div class="stat">
+            <div class="num">35</div>
+            <div class="desc">Betten im Haus</div>
+          </div>
+          <div class="stat">
+            <div class="num">6000&thinsp;m²</div>
+            <div class="desc">Garten &amp; Wiese</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="block">
       <div class="container">
-        <div class="kicker-row">
+        <div class="kicker-row reveal">
           <span class="no">02</span>
           <span class="label">Unsere Tiere</span>
         </div>
-        <div class="two-col" style="margin-bottom: 2.6rem;">
+        <div class="two-col reveal" style="margin-bottom: 2.6rem;">
           <h2>Zum Alltag gehören auch die Tiere</h2>
           <p class="muted">
             Katzen im Haus, Pferde im Stall und Hasen im Garten. Und natürlich
@@ -88,32 +109,32 @@
             und begleiten das Leben auf der Mühle.
           </p>
         </div>
-        <div class="photo-row">
+        <div class="photo-row reveal">
           <figure>
-            <img src="images/pferd-portrait.jpg" alt="Eines unserer Pferde in der Abendsonne" loading="lazy">
+            <span><img src="images/pferd-portrait.jpg" alt="Eines unserer Pferde in der Abendsonne" loading="lazy"></span>
             <figcaption>Pferde im Stall</figcaption>
           </figure>
           <figure>
-            <img src="images/katze-stall.jpg" alt="Katze vor der Stalltür" loading="lazy">
+            <span><img src="images/katze-stall.jpg" alt="Katze vor der Stalltür" loading="lazy"></span>
             <figcaption>Katzen im Haus</figcaption>
           </figure>
           <figure>
-            <img src="images/hasen.jpg" alt="Hasen im Gras" loading="lazy">
+            <span><img src="images/hasen.jpg" alt="Hasen im Gras" loading="lazy"></span>
             <figcaption>Hasen im Garten</figcaption>
           </figure>
           <figure>
-            <img src="images/esel.jpg" alt="Esel auf der Weide" loading="lazy">
+            <span><img src="images/esel.jpg" alt="Esel auf der Weide" loading="lazy"></span>
             <figcaption>Vierbeinige Nachbarn</figcaption>
           </figure>
           <figure>
-            <img src="images/kuehe-morgennebel.jpg" alt="Kühe im Morgennebel" loading="lazy">
+            <span><img src="images/kuehe-morgennebel.jpg" alt="Kühe im Morgennebel" loading="lazy"></span>
             <figcaption>Kühe der Nachbarn</figcaption>
           </figure>
         </div>
       </div>
     </section>
 
-    <section class="pullquote">
+    <section class="quote-band">
       <div class="container">
         <span class="mark"></span>
         <blockquote>
@@ -123,13 +144,13 @@
       </div>
     </section>
 
-    <section class="block" style="border-top: 1px solid var(--line);">
+    <section class="block">
       <div class="container two-col flip">
-        <figure>
-          <img src="images/fassade-schindeln.jpg" alt="Die schindelverkleidete Fassade des neuen Hauses" loading="lazy">
+        <figure class="reveal">
+          <span><img src="images/fassade-schindeln.jpg" alt="Die schindelverkleidete Fassade des neuen Hauses" loading="lazy"></span>
           <figcaption>Die neue Fassade, verschindelt wie eh und je</figcaption>
         </figure>
-        <div>
+        <div class="reveal">
           <div class="kicker-row">
             <span class="no">03</span>
             <span class="label">Wer zu uns kommt</span>
@@ -150,9 +171,9 @@
       </div>
     </section>
 
-    <section class="block">
+    <section class="band-tint block">
       <div class="container two-col">
-        <div>
+        <div class="reveal">
           <div class="kicker-row">
             <span class="no">04</span>
             <span class="label">Chronik</span>
@@ -181,32 +202,23 @@
             </div>
           </div>
         </div>
-        <figure>
-          <img src="images/muehle-luftbild.jpg" alt="Die neue Mühle mit Photovoltaik-Dach vor Allgäuer Bergen" loading="lazy">
+        <figure class="reveal">
+          <span><img src="images/muehle-luftbild.jpg" alt="Die neue Mühle mit Photovoltaik-Dach vor Allgäuer Bergen" loading="lazy"></span>
           <figcaption>Die neue Mühle, Sommer 2025</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="block">
+    <section class="cta-band">
+      <img class="bg" src="images/muehle-luftbild.jpg" alt="" aria-hidden="true" loading="lazy">
       <div class="container">
-        <div class="kicker-row">
-          <span class="no">05</span>
-          <span class="label">Kontakt</span>
-        </div>
-        <div class="two-col">
-          <h2>Lust auf Mühle bekommen?</h2>
-          <div>
-            <p class="muted">
-              Fragen zu Terminen, Belegung oder einfach Lust, die Mühle
-              kennenzulernen? Ruft an unter
-              <a href="tel:+4983651628">08365&nbsp;/&nbsp;1628</a> oder schreibt
-              an <a href="mailto:Wertachermuehle@web.de">Wertachermuehle@web.de</a> –
-              wir melden uns.
-            </p>
-            <a class="btn-line" href="ihr-bei-uns.html">Kontakt &amp; Anfahrt</a>
-          </div>
-        </div>
+        <h2>Lust auf Mühle bekommen?</h2>
+        <p>
+          Fragen zu Terminen, Belegung oder einfach Lust, die Mühle
+          kennenzulernen? Ruft an unter <a href="tel:+4983651628">08365&nbsp;/&nbsp;1628</a>
+          oder schreibt an <a href="mailto:Wertachermuehle@web.de">Wertachermuehle@web.de</a>.
+        </p>
+        <a class="btn-line" href="ihr-bei-uns.html">Kontakt &amp; Anfahrt</a>
       </div>
     </section>
 

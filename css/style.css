@@ -116,6 +116,7 @@ p a, li a {
   letter-spacing: 0.13em;
   text-transform: uppercase;
   text-decoration: none;
+  color: var(--ink);
   padding: 0.4rem 0;
   border-bottom: 1px solid transparent;
   transition: border-color 0.15s, color 0.15s;
@@ -150,6 +151,8 @@ p a, li a {
 }
 
 .site-header.on-hero .brand-sub { color: rgba(255, 255, 255, 0.7); }
+
+.site-header.on-hero .main-nav a { color: #fff; }
 
 .site-header.on-hero .main-nav a.active {
   color: #fff;

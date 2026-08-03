@@ -50,7 +50,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 
 a { color: inherit; }
 
@@ -148,6 +148,10 @@ p a, li a {
   background: linear-gradient(180deg, rgba(16, 20, 14, 0.55) 0%, rgba(16, 20, 14, 0) 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.22);
   color: #fff;
+}
+
+.site-header.on-hero.nav-open {
+  background: rgba(16, 20, 14, 0.94);
 }
 
 .site-header.on-hero .brand-sub { color: rgba(255, 255, 255, 0.7); }
@@ -321,6 +325,12 @@ figcaption {
 .band-dark figcaption { color: rgba(255, 255, 255, 0.6); }
 
 figure.frame { overflow: hidden; }
+
+.full-photo img {
+  width: 100%;
+  max-height: 640px;
+  object-fit: cover;
+}
 
 figure.frame img,
 .photo-row figure > span img,
@@ -715,16 +725,18 @@ figure.frame img,
    Scroll-Reveal
    -------------------------------------------------------------------------- */
 
-.reveal {
+/* Nur ausblenden, wenn JavaScript läuft – sonst bleibt der Inhalt sichtbar */
+
+.js .reveal {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.reveal.visible { opacity: 1; transform: none; }
+.js .reveal.visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
   .photo-row figure img, .two-col figure img { transition: none; }
 }

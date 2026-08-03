@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wertacher Mühle | Gruppenhaus im Oberallgäu</title>
+  <meta name="description" content="Die Wertacher Mühle im Allgäu – Gruppenhaus auf fast 1000 m Höhe für Alleinerziehende, Schulklassen und Gruppen. Umgeben von Wiesen, Bergen und Tieren.">
+  <meta name="theme-color" content="#1f3126">
+  <meta property="og:title" content="Wertacher Mühle | Gruppenhaus im Oberallgäu">
+  <meta property="og:description" content="Gruppenhaus auf fast 1000 m Höhe für Alleinerziehende, Schulklassen und Gruppen – umgeben von Wiesen, Bergen und Tieren.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <link rel="icon" href="@@FAVICON@@">
+  <style>
+/* ==========================================================================
+   Wertacher Mühle – Sonnenhof e.V. (Einzeldatei-Version)
+   Schriften: Fraunces & Inter (Open-Source, eingebettet)
+   ========================================================================== */
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("@@FONT_FRAUNCES@@") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("@@FONT_INTER@@") format("woff2");
+}
+
+:root {
+  --paper: #f4f0e6;
+  --paper-deep: #ebe5d6;
+  --ink: #211f19;
+  --muted: #6f695a;
+  --oxblood: #6e2028;
+  --oxblood-deep: #571a20;
+  --green: #2c4434;
+  --green-deep: #1f3126;
+  --line: #d9d0bc;
+  --cream: #f6f3ec;
+  --gold: #d9a24a;
+  --display: "Fraunces", Georgia, serif;
+  --text: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+::selection { background: var(--oxblood); color: #fff; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--text);
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; }
+
+p a, li a {
+  color: var(--oxblood);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.container { width: min(1200px, 92%); margin-inline: auto; }
+
+.narrow { max-width: 660px; }
+
+main [id] { scroll-margin-top: 6.5rem; }
+
+/* --------------------------------------------------------------------------
+   Kopf (fest, wird beim Scrollen dunkel hinterlegt)
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(16, 20, 14, 0.55) 0%, rgba(16, 20, 14, 0) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.site-header.scrolled,
+.site-header.nav-open {
+  background: rgba(21, 26, 19, 0.96);
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  flex-wrap: wrap;
+}
+
+.brand { text-decoration: none; }
+
+.brand-name {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.45rem;
+  letter-spacing: 0.005em;
+}
+
+.brand-sub {
+  display: block;
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.3rem;
+}
+
+.main-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.9rem;
+  list-style: none;
+}
+
+.main-nav a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.main-nav a:hover { border-bottom-color: currentColor; }
+
+.main-nav a.active { border-bottom-color: var(--gold); }
+
+.nav-toggle {
+  display: none;
+  font-family: var(--text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid currentColor;
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+@media (max-width: 900px) {
+  .nav-toggle { display: block; }
+  .main-nav { display: none; width: 100%; }
+  .main-nav.open { display: block; }
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 0.8rem 0 1.2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    margin-top: 1rem;
+  }
+  .main-nav a { display: inline-block; padding: 0.55rem 0; border-bottom: none; }
+  .main-nav a.active { color: var(--gold); }
+}
+
+/* --------------------------------------------------------------------------
+   Typografie
+   -------------------------------------------------------------------------- */
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2.6rem, 6.5vw, 4.8rem); font-weight: 300; }
+
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 350; }
+
+h3 { font-size: 1.25rem; font-weight: 500; line-height: 1.35; }
+
+p + p { margin-top: 1.1em; }
+
+.lead {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 350;
+  line-height: 1.5;
+}
+
+.muted { color: var(--muted); }
+
+.kicker-row {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-bottom: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+
+.kicker-row .no {
+  font-family: var(--display);
+  font-weight: 350;
+  font-size: 0.95rem;
+  color: var(--oxblood);
+  flex: none;
+}
+
+.kicker-row .label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex: none;
+}
+
+.kicker-row::after {
+  content: "";
+  height: 1px;
+  background: var(--line);
+  flex: 1;
+}
+
+.band-dark .kicker-row .label { color: rgba(255, 255, 255, 0.6); }
+.band-dark .kicker-row .no { color: var(--gold); }
+.band-dark .kicker-row::after { background: rgba(255, 255, 255, 0.2); }
+
+/* --------------------------------------------------------------------------
+   Vollbild-Hero
+   -------------------------------------------------------------------------- */
+
+.hero-full {
+  position: relative;
+  min-height: min(92vh, 900px);
+  display: flex;
+  align-items: flex-end;
+  color: #fff;
+}
+
+.hero-full .bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+.hero-full::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(20, 24, 17, 0.58) 0%, rgba(20, 24, 17, 0.12) 38%, rgba(20, 24, 17, 0.74) 100%);
+}
+
+.hero-full .container {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.hero-full h1 {
+  max-width: 14ch;
+  margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.hero-meta span {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 1rem 2.4rem 0 0;
+}
+
+.hero-meta span + span { padding-left: 2.4rem; border-left: 1px solid rgba(255, 255, 255, 0.35); }
+
+@media (max-width: 640px) {
+  .hero-meta span { padding-right: 1.2rem; }
+  .hero-meta span + span { padding-left: 1.2rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Bilder
+   -------------------------------------------------------------------------- */
+
+figcaption {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.8rem;
+}
+
+.band-dark figcaption { color: rgba(255, 255, 255, 0.6); }
+
+.full-photo img {
+  width: 100%;
+  max-height: 640px;
+  object-fit: cover;
+}
+
+.photo-row figure > span img,
+.two-col figure > span img {
+  transition: transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.crop-top { object-position: top; }
+
+.photo-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1.4rem;
+  counter-reset: photo;
+}
+
+.photo-row figure { counter-increment: photo; }
+
+.photo-row figure > span {
+  display: block;
+  overflow: hidden;
+}
+
+.photo-row figure img {
+  width: 100%;
+  aspect-ratio: 10 / 14;
+  object-fit: cover;
+}
+
+.photo-row figure:hover img { transform: scale(1.05); }
+
+.photo-row figcaption::before {
+  content: counter(photo, decimal-leading-zero) "  ·  ";
+  color: var(--oxblood);
+}
+
+@media (max-width: 680px) {
+  .photo-row { grid-template-columns: 1fr 1fr; gap: 1rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Abschnitte, Bänder & Raster
+   -------------------------------------------------------------------------- */
+
+.block { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
+
+.band-dark {
+  background: var(--green-deep);
+  color: rgba(246, 243, 236, 0.85);
+}
+
+.band-dark h2, .band-dark h3 { color: #f6f3ec; }
+
+.band-dark p a, .band-dark li a { color: var(--gold); }
+
+.band-tint { background: var(--paper-deep); }
+
+.two-col {
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  gap: clamp(2.2rem, 6vw, 5.5rem);
+  align-items: start;
+}
+
+.two-col.flip { grid-template-columns: 5fr 6fr; }
+
+.two-col.even { grid-template-columns: 1fr 1fr; }
+
+.two-col figure > span { display: block; overflow: hidden; }
+
+.two-col figure img {
+  width: 100%;
+  max-height: 560px;
+  object-fit: cover;
+}
+
+.two-col figure:hover img { transform: scale(1.04); }
+
+.two-col h2 { margin-bottom: 1.1rem; max-width: 18ch; }
+
+@media (max-width: 780px) {
+  .two-col, .two-col.flip, .two-col.even { grid-template-columns: 1fr; }
+  .two-col figure img { max-height: 440px; }
+}
+
+/* Kennzahlen-Band */
+
+.stats-band .grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.stats-band .stat { border-top: 1px solid rgba(255, 255, 255, 0.25); padding-top: 1.2rem; }
+
+.stats-band .num {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  line-height: 1;
+  color: #f6f3ec;
+}
+
+.stats-band .desc {
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(246, 243, 236, 0.6);
+}
+
+@media (max-width: 820px) {
+  .stats-band .grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Zitat-Band */
+
+.quote-band {
+  background: var(--oxblood-deep);
+  color: #f6f3ec;
+  text-align: center;
+  padding: clamp(4rem, 9vw, 6.5rem) 0;
+}
+
+.quote-band blockquote {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(1.7rem, 3.8vw, 2.9rem);
+  line-height: 1.3;
+  max-width: 24ch;
+  margin-inline: auto;
+}
+
+.quote-band .mark {
+  display: block;
+  width: 42px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 2rem;
+}
+
+/* Chronik */
+
+.chronik { margin-top: 2rem; }
+
+.chronik-row {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1.4rem;
+  padding: 1.3rem 0;
+  border-top: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.chronik-row .jahr {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 1.7rem;
+  color: var(--oxblood);
+  line-height: 1;
+}
+
+.chronik-row p { color: var(--muted); font-size: 0.95rem; line-height: 1.65; }
+
+@media (max-width: 520px) {
+  .chronik-row { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+
+/* Listen */
+
+.plain-list { list-style: none; margin-top: 1.6rem; }
+
+.plain-list li {
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.plain-list li a { color: var(--oxblood); }
+
+/* Kontakt */
+
+.kontakt-liste { list-style: none; margin-top: 2rem; }
+
+.kontakt-liste li {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1.2rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.kontakt-liste li:last-child { border-bottom: 1px solid var(--line); }
+
+.kontakt-liste .art {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 0.4rem;
+}
+
+.kontakt-liste .muted { font-size: 0.92rem; }
+
+@media (max-width: 540px) {
+  .kontakt-liste li { grid-template-columns: 1fr; gap: 0.2rem; }
+}
+
+/* Button */
+
+.btn-line {
+  display: inline-block;
+  margin-top: 1.8rem;
+  padding: 0.85rem 2rem;
+  border: 1px solid var(--ink);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-line:hover {
+  background: var(--oxblood);
+  border-color: var(--oxblood);
+  color: #fff;
+}
+
+/* CTA-Band */
+
+.cta-solid {
+  background: var(--green-deep);
+  color: #f6f3ec;
+  text-align: center;
+  padding: clamp(4rem, 9vw, 7rem) 0;
+}
+
+.cta-solid h2 { color: #f6f3ec; max-width: 20ch; margin-inline: auto; margin-bottom: 1.2rem; }
+
+.cta-solid p { max-width: 46ch; margin-inline: auto; color: rgba(246, 243, 236, 0.8); }
+
+.cta-solid p a { color: var(--gold); }
+
+.cta-solid .btn-line { border-color: #f6f3ec; color: #f6f3ec; margin-top: 2.2rem; }
+
+.cta-solid .btn-line:hover { background: #f6f3ec; color: var(--green-deep); border-color: #f6f3ec; }
+
+/* Rechtstexte (auf- und zuklappbar) */
+
+.legal h2 { margin-bottom: 1.6rem; }
+
+.legal details {
+  border-top: 1px solid var(--line);
+  max-width: 760px;
+}
+
+.legal details:last-of-type { border-bottom: 1px solid var(--line); }
+
+.legal summary {
+  cursor: pointer;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.25rem;
+  padding: 1.1rem 2.2rem 1.1rem 0;
+  position: relative;
+  list-style: none;
+}
+
+.legal summary::-webkit-details-marker { display: none; }
+
+.legal summary::after {
+  content: "+";
+  position: absolute;
+  right: 0.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--text);
+  font-size: 1.3rem;
+  color: var(--oxblood);
+}
+
+.legal details[open] summary::after { content: "–"; }
+
+.legal .prose { padding: 0.2rem 0 1.8rem; }
+
+.prose { max-width: 640px; }
+
+.prose h3 { font-size: 1.05rem; margin: 1.6rem 0 0.4rem; }
+
+.prose h4 {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin: 1.8rem 0 0.5rem;
+}
+
+.prose p, .prose ul { color: var(--muted); font-size: 0.98rem; }
+
+.prose ul { margin: 0.6rem 0 1em 1.2rem; }
+
+.prose .hint {
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-left: 2px solid var(--oxblood);
+  padding: 0.4rem 0 0.4rem 1.1rem;
+  margin: 1.1em 0;
+}
+
+/* --------------------------------------------------------------------------
+   Fuß
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  background: #1a2018;
+  color: rgba(246, 243, 236, 0.75);
+  padding: clamp(3rem, 7vw, 5rem) 0 2rem;
+}
+
+.site-footer .footer-mark {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(2rem, 5.5vw, 3.6rem);
+  line-height: 1.1;
+  color: #f6f3ec;
+  letter-spacing: -0.01em;
+  margin-bottom: clamp(2.2rem, 5vw, 3.5rem);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 2.5rem;
+  padding-top: 2.2rem;
+  border-top: 1px solid rgba(246, 243, 236, 0.18);
+}
+
+@media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; } }
+
+.site-footer h4 {
+  font-family: var(--text);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(246, 243, 236, 0.5);
+  margin-bottom: 1rem;
+}
+
+.site-footer p { font-size: 0.95rem; line-height: 1.9; }
+
+.site-footer ul { list-style: none; }
+
+.site-footer li { padding: 0.2rem 0; font-size: 0.95rem; }
+
+.site-footer a { color: rgba(246, 243, 236, 0.85); text-decoration: none; }
+
+.site-footer a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+
+.footer-note {
+  margin-top: 3rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(246, 243, 236, 0.18);
+  font-size: 0.8rem;
+  color: rgba(246, 243, 236, 0.45);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  justify-content: space-between;
+}
+
+.footer-note a { color: rgba(246, 243, 236, 0.6); }
+
+/* --------------------------------------------------------------------------
+   Scroll-Reveal (nur wenn JavaScript läuft)
+   -------------------------------------------------------------------------- */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.js .reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .photo-row figure img, .two-col figure img { transition: none; }
+}
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="#muehle">
+        <span class="brand-name">Wertacher Mühle</span>
+        <span class="brand-sub">Sonnenhof e.V. · Wertach im Allgäu</span>
+      </a>
+      <button class="nav-toggle" aria-controls="hauptnavigation" aria-expanded="false">Menü</button>
+      <nav id="hauptnavigation" class="main-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="#muehle" class="active">Die Mühle</a></li>
+          <li><a href="#haus">Das Haus</a></li>
+          <li><a href="#singleeltern">Singleeltern</a></li>
+          <li><a href="#gruppen">Gruppen</a></li>
+          <li><a href="#schulklassen">Schulklassen</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero-full" id="muehle">
+      <img class="bg" @@IMG_hero@@ alt="Die Wertacher Mühle am Abend, dahinter Wiesen und die Allgäuer Berge">
+      <div class="container">
+        <h1>Die Wertacher Mühle im&nbsp;Allgäu</h1>
+        <div class="hero-meta">
+          <span>Wertach im Oberallgäu</span>
+          <span>Fast 1000 m Höhe</span>
+          <span>Erstmals erwähnt 1424</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container two-col">
+        <div class="reveal">
+          <div class="kicker-row">
+            <span class="no">01</span>
+            <span class="label">Die Mühle</span>
+          </div>
+          <p class="lead">
+            Wir liegen auf fast 1000 Metern Höhe – umgeben von Wiesen, Bäumen
+            und Bergpanorama. Alle Zimmer blicken ins Grüne. Und vor der Tür
+            beginnt die Natur – einfach Natur erleben.
+          </p>
+          <p style="margin-top: 1.4em;" class="muted">
+            Auf der Rückseite fließt ein Bach, der früher das Mühlrad
+            angetrieben hat. Man hört ihn im Haus – mal leise, mal deutlicher.
+            Nach dem Brand von 2021 wurde die Mühle als ökologisches
+            Vollholzhaus wieder aufgebaut – mit Erdwärme, Sonnenstrom vom Dach
+            und Holzöfen in den Stuben.
+          </p>
+          <a class="btn-line" href="#haus">Das Haus ansehen</a>
+        </div>
+        <figure class="reveal">
+          <span><img class="crop-top" @@IMG_vogel@@ alt="Die Mühle von oben, mitten im Wald" loading="lazy"></span>
+          <figcaption>Alleinstehend zwischen Wald und Wiesen</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="band-dark stats-band block">
+      <div class="container">
+        <div class="grid reveal">
+          <div class="stat">
+            <div class="num">1424</div>
+            <div class="desc">Erste Erwähnung</div>
+          </div>
+          <div class="stat">
+            <div class="num">1000&thinsp;m</div>
+            <div class="desc">Höhenlage</div>
+          </div>
+          <div class="stat">
+            <div class="num">35</div>
+            <div class="desc">Betten im Haus</div>
+          </div>
+          <div class="stat">
+            <div class="num">6000&thinsp;m²</div>
+            <div class="desc">Garten &amp; Wiese</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="tiere">
+      <div class="container">
+        <div class="kicker-row reveal">
+          <span class="no">02</span>
+          <span class="label">Unsere Tiere</span>
+        </div>
+        <div class="two-col reveal" style="margin-bottom: 2.6rem;">
+          <h2>Zum Alltag gehören auch die Tiere</h2>
+          <p class="muted">
+            Katzen im Haus, Pferde im Stall und Hasen im Garten. Und natürlich
+            auch die Kühe auf den Weiden der Nachbarbauern. Sie sind einfach da
+            und begleiten das Leben auf der Mühle.
+          </p>
+        </div>
+        <div class="photo-row reveal">
+          <figure>
+            <span><img @@IMG_pferd@@ alt="Eines unserer Pferde in der Abendsonne" loading="lazy"></span>
+            <figcaption>Pferde im Stall</figcaption>
+          </figure>
+          <figure>
+            <span><img @@IMG_katze_stall@@ alt="Katze vor der Stalltür" loading="lazy"></span>
+            <figcaption>Wachsame Hofkatze</figcaption>
+          </figure>
+          <figure>
+            <span><img @@IMG_katze@@ alt="Neugierige Katze im Haus" loading="lazy"></span>
+            <figcaption>Katzen im Haus</figcaption>
+          </figure>
+          <figure>
+            <span><img @@IMG_hasen@@ alt="Hasen im Gras" loading="lazy"></span>
+            <figcaption>Hasen im Garten</figcaption>
+          </figure>
+          <figure>
+            <span><img @@IMG_esel@@ alt="Esel auf der Weide" loading="lazy"></span>
+            <figcaption>Vierbeinige Nachbarn</figcaption>
+          </figure>
+          <figure>
+            <span><img @@IMG_kuehe@@ alt="Kühe im Morgennebel" loading="lazy"></span>
+            <figcaption>Kühe der Nachbarn</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-band">
+      <div class="container">
+        <span class="mark"></span>
+        <blockquote>
+          Ein ruhiger Ort mit viel Raum. Und einer, an dem sich manches von
+          selbst ergibt.
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <div class="narrow reveal">
+          <div class="kicker-row">
+            <span class="no">03</span>
+            <span class="label">Wer zu uns kommt</span>
+          </div>
+          <h2>Ferien für Menschen, die Gemeinschaft suchen</h2>
+          <p class="muted" style="margin-top: 1.1rem;">
+            Die Mühle wird vom gemeinnützigen Verein „Wertacher Mühle,
+            Sonnenhof e.V.“ getragen. In den Schulferien gehört das Haus den
+            Alleinerziehenden und ihren Kindern. Dazwischen kommen Schulklassen,
+            Familienfreizeiten, Seminare und Gruppen aller Art.
+          </p>
+          <ul class="plain-list">
+            <li><a href="#singleeltern">Urlaub für Singleeltern</a> — Ferien in Gemeinschaft, in allen Schulferien</li>
+            <li><a href="#gruppen">Gruppen</a> — Freizeiten, Seminare, Vereine und Chöre</li>
+            <li><a href="#schulklassen">Schulklassen</a> — Klassenfahrten mit Natur und Tieren</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="band-tint block" id="chronik">
+      <div class="container two-col">
+        <div class="reveal">
+          <div class="kicker-row">
+            <span class="no">04</span>
+            <span class="label">Chronik</span>
+          </div>
+          <h2>Sechshundert Jahre Mühlengeschichte</h2>
+          <div class="chronik">
+            <div class="chronik-row">
+              <span class="jahr">1424</span>
+              <p>Erste urkundliche Erwähnung als „Schleifmühle“. Über Jahrhunderte werden hier Roggen, Weizen und Hafer gemahlen.</p>
+            </div>
+            <div class="chronik-row">
+              <span class="jahr">1960</span>
+              <p>Bis 1990 privates Kindererholungsheim „Sonnenhof“ für bis zu 80 Kinder.</p>
+            </div>
+            <div class="chronik-row">
+              <span class="jahr">1992</span>
+              <p>Gründung des gemeinnützigen Vereins „Wertacher Mühle, Sonnenhof e.V.“ – seither Ferien für Alleinerziehende, Gruppen und Schulklassen.</p>
+            </div>
+            <div class="chronik-row">
+              <span class="jahr">2021</span>
+              <p>Ein Brand zerstört das alte Mühlengebäude. Viele Freundinnen und Freunde der Mühle helfen beim Neuanfang.</p>
+            </div>
+            <div class="chronik-row">
+              <span class="jahr">Heute</span>
+              <p>Die neue Mühle steht – aus massivem Holz, gebaut für die nächsten Generationen.</p>
+            </div>
+          </div>
+        </div>
+        <figure class="reveal">
+          <span><img @@IMG_luftbild@@ alt="Die neue Mühle mit Photovoltaik-Dach vor Allgäuer Bergen" loading="lazy"></span>
+          <figcaption>Die neue Mühle, Sommer 2025</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block" id="haus">
+      <div class="container">
+        <div class="two-col reveal">
+          <div>
+            <div class="kicker-row">
+              <span class="no">05</span>
+              <span class="label">Das Haus</span>
+            </div>
+            <h2>Neu gebaut, alt gedacht</h2>
+            <p class="muted">
+              Nach dem Brand im Jahr 2021 wurde die Mühle als ökologisches
+              Vollholzhaus neu errichtet: massives Holz, eine verschindelte
+              Fassade, geheizt mit Erdwärme und Holzöfen, den Strom liefert die
+              Sonne über die Photovoltaik auf dem Dach. Ein neues Haus –
+              gebaut, wie man hier schon immer gebaut hat.
+            </p>
+            <p class="muted">
+              Ihr möchtet das Haus sehen? Wir zeigen es euch gerne persönlich –
+              ruft an unter <a href="tel:+4983651628">08365&nbsp;/&nbsp;1628</a>
+              oder schreibt an
+              <a href="mailto:Wertachermuehle@web.de">Wertachermuehle@web.de</a>.
+            </p>
+          </div>
+          <figure>
+            <span><img @@IMG_fassade@@ alt="Die schindelverkleidete Fassade des neuen Hauses" loading="lazy"></span>
+            <figcaption>Holzschindeln, wie sie ins Allgäu gehören</figcaption>
+          </figure>
+        </div>
+        <div class="two-col even reveal" style="margin-top: clamp(2.5rem, 6vw, 4rem);">
+          <div>
+            <h3>Drinnen</h3>
+            <ul class="plain-list">
+              <li>35 Betten in gemütlichen Zimmern – alle mit Blick ins Grüne</li>
+              <li>Zwei Ess- und Aufenthaltsräume mit Holzöfen</li>
+              <li>Großer Seminar- und Gruppenraum</li>
+              <li>Gästeküche mit Spülmaschine für Selbstversorger</li>
+              <li>Lesezimmer, Spielzimmer, Tischtennis und Kicker</li>
+              <li>Trockenraum und Waschmaschine für lange Aufenthalte</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Draußen</h3>
+            <ul class="plain-list">
+              <li>Rund 6000 m² Spiel- und Liegewiese mit altem Baumbestand</li>
+              <li>Lagerfeuer- und Grillplatz</li>
+              <li>Kinderspielplatz und Platz zum Toben</li>
+              <li>Stall mit Pferden, Hasen im Garten, Katzen im Haus</li>
+              <li>Der Bach hinterm Haus – früher trieb er das Mühlrad</li>
+              <li>Wandern, Radfahren, Wintersport und Parkplätze direkt am Haus</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band-tint block" id="singleeltern">
+      <div class="container two-col">
+        <div class="reveal">
+          <div class="kicker-row">
+            <span class="no">06</span>
+            <span class="label">In allen Schulferien</span>
+          </div>
+          <h2>Urlaub für Singleeltern</h2>
+          <p class="muted">
+            Alleinerziehende tragen viel – im Alltag und oft auch im Urlaub.
+            In der Mühle muss niemand alles alleine stemmen: Die Kinder finden
+            schnell Spielkameraden, die Großen finden Zeit zum Durchatmen und
+            gute Gespräche am Abend.
+          </p>
+          <p class="muted">
+            Morgens gemeinsames Frühstück in der Stube, danach zieht es die
+            Kinder meist direkt zu den Pferden und Hasen. Tagsüber wandern,
+            baden, in die Berge fahren – oder einfach den ganzen Tag auf der
+            Spielwiese und am Bach bleiben. Abends Lagerfeuer, Spiele oder
+            einfach Ruhe am Holzofen, während die Kinder längst Freunde
+            geworden sind.
+          </p>
+          <p class="muted">
+            Die Ferienzeiten sind schnell ausgebucht – fragt am besten
+            frühzeitig an: <a href="tel:+4983651628">08365&nbsp;/&nbsp;1628</a>
+            oder <a href="mailto:Wertachermuehle@web.de">Wertachermuehle@web.de</a>.
+          </p>
+        </div>
+        <figure class="reveal">
+          <span><img @@IMG_allgaeu@@ alt="Blick über die Allgäuer Hügel mit kleiner Kapelle" loading="lazy"></span>
+          <figcaption>Vor der Tür: das Allgäu</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block" id="gruppen">
+      <div class="container">
+        <div class="narrow reveal">
+          <div class="kicker-row">
+            <span class="no">07</span>
+            <span class="label">Freizeiten, Seminare, Vereine</span>
+          </div>
+          <h2>Ein ganzes Haus für eure Gruppe</h2>
+          <p class="muted" style="margin-top: 1.1rem;">
+            Familienfreizeiten, Seminare, Chöre, Vereine und Sportgruppen:
+            Die Mühle bietet Raum für alle, die etwas miteinander vorhaben.
+            Wer die Mühle bucht, hat sie für sich – das ganze Haus, den Garten,
+            den Bach und die Ruhe drumherum. Als gemeinnütziger Verein liegen
+            uns Gruppen mit sozialen Anliegen besonders am Herzen.
+          </p>
+          <ul class="plain-list">
+            <li>Bis zu 35 Betten</li>
+            <li>Großer Seminar- und Gruppenraum für Programm und Proben</li>
+            <li>Zwei Stuben mit Holzöfen für die Abende</li>
+            <li>Gästeküche für Selbstversorger – Verpflegung nach Absprache</li>
+            <li>6000 m² Garten mit Lagerfeuerplatz und Spielwiese</li>
+            <li>Parkplätze direkt am Haus</li>
+          </ul>
+          <p class="muted" style="margin-top: 1.6rem;">
+            Wandern und Radfahren beginnen an der Haustür, im Winter sind
+            Skigebiete und Rodelhänge in der Nähe. Der Grüntensee, Bad
+            Hindelang und Füssen mit Schloss Neuschwanstein sind lohnende
+            Ausflugsziele – und wer bleiben mag, bleibt einfach am Lagerfeuer.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band-tint block" id="schulklassen">
+      <div class="container two-col">
+        <div class="reveal">
+          <div class="kicker-row">
+            <span class="no">08</span>
+            <span class="label">Klassenfahrten</span>
+          </div>
+          <h2>Schulklassen auf der Mühle</h2>
+          <p class="muted">
+            Die alleinstehende Lage, der Gruppenraum und das große Gelände
+            geben Kindern und Jugendlichen Raum, kreativ zu werden, zu spielen
+            und Natur zu entdecken – ganz ohne Ablenkung. Der Bach hinterm
+            Haus ist das schönste Freiluft-Klassenzimmer. Dazu kommen die
+            Tiere: Pferde striegeln, Hasen füttern, Verantwortung übernehmen.
+            Und abends Stockbrot und Sternenhimmel am Lagerfeuerplatz.
+          </p>
+          <ul class="plain-list">
+            <li>Platz für Klassen bis 35 Personen samt Begleitung</li>
+            <li>Alleinstehende Lage – niemand stört, niemand wird gestört</li>
+            <li>Gruppenraum für Programm, Spiele und Regentage</li>
+            <li>Spielwiese, Tischtennis, Kicker und Lagerfeuerplatz</li>
+            <li>Wanderungen direkt ab Haus</li>
+          </ul>
+          <p class="muted" style="margin-top: 1.6rem;">
+            <strong>Für Lehrkräfte:</strong> Verpflegung nach Absprache oder
+            Selbstversorgung in der Gästeküche. Wertach liegt an der B310 und
+            ist gut mit dem Bus zu erreichen; Parkplätze gibt es am Haus.
+            Termine und Konditionen besprechen wir am liebsten persönlich.
+          </p>
+        </div>
+        <figure class="reveal">
+          <span><img @@IMG_weide@@ alt="Pferde auf der Weide vor der Mühle" loading="lazy"></span>
+          <figcaption>Die Pferde gehören zum Programm</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="cta-solid">
+      <div class="container">
+        <h2>Lust auf Mühle bekommen?</h2>
+        <p>
+          Fragen zu Terminen, Belegung oder einfach Lust, die Mühle
+          kennenzulernen? Ruft an unter <a href="tel:+4983651628">08365&nbsp;/&nbsp;1628</a>
+          oder schreibt an <a href="mailto:Wertachermuehle@web.de">Wertachermuehle@web.de</a>.
+        </p>
+        <a class="btn-line" href="#kontakt">Kontakt &amp; Anfahrt</a>
+      </div>
+    </section>
+
+    <section class="block" id="kontakt">
+      <div class="container two-col">
+        <div class="reveal">
+          <div class="kicker-row">
+            <span class="no">09</span>
+            <span class="label">Kontakt &amp; Anfahrt</span>
+          </div>
+          <h2>So erreicht ihr uns</h2>
+          <ul class="kontakt-liste">
+            <li>
+              <span class="art">Anschrift</span>
+              <span>
+                Wertacher Mühle, Sonnenhof e.V.<br>
+                Vorderschneid 7<br>
+                87497 Wertach (im Allgäu)
+              </span>
+            </li>
+            <li>
+              <span class="art">Telefon</span>
+              <span><a href="tel:+4983651628">08365 / 1628</a><br>
+              <span class="muted">Am besten vormittags oder abends – tagsüber sind wir viel im Haus und Garten unterwegs.</span></span>
+            </li>
+            <li>
+              <span class="art">E-Mail</span>
+              <span><a href="mailto:Wertachermuehle@web.de">Wertachermuehle@web.de</a><br>
+              <span class="muted">Schreibt uns, wer ihr seid und wann ihr kommen möchtet.</span></span>
+            </li>
+            <li>
+              <span class="art">Mühlesocial</span>
+              <span>
+                <a href="https://www.instagram.com/wertacher_muehle" target="_blank" rel="noopener">Instagram @wertacher_muehle</a><br>
+                <a href="https://www.facebook.com/wertachermuehle" target="_blank" rel="noopener">Facebook</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <h3 style="margin-top: 0.4rem;">Anfahrt</h3>
+          <p class="muted" style="margin-top: 0.8rem;">
+            <strong>Mit dem Auto:</strong> Über die A7 bis zur Ausfahrt
+            Oy-Mittelberg, weiter auf der B310 Richtung Wertach / Oberjoch.
+            In Wertach der Beschilderung Richtung Vorderschneid folgen – die
+            Mühle liegt alleinstehend am Ortsrand. Fürs Navi:
+            Vorderschneid&nbsp;7, 87497&nbsp;Wertach. Parkplätze gibt es
+            direkt am Haus.
+          </p>
+          <p class="muted">
+            <strong>Mit Bahn und Bus:</strong> Bahn bis Kempten oder
+            Sonthofen, weiter mit dem Bus nach Wertach. Abholung von der
+            Bushaltestelle nach Absprache.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band-tint block legal" id="rechtliches">
+      <div class="container">
+        <h2>Rechtliches</h2>
+
+        <details id="impressum">
+          <summary>Impressum</summary>
+          <div class="prose">
+            <h4>Angaben gemäß § 5 DDG</h4>
+            <p>
+              Wertacher Mühle, Sonnenhof e.V.<br>
+              Vorderschneid 7<br>
+              87497 Wertach<br>
+              Deutschland
+            </p>
+            <h4>Kontakt</h4>
+            <p>
+              Telefon: 08365 / 1628<br>
+              E-Mail: Wertachermuehle@web.de
+            </p>
+            <h4>Vertreten durch</h4>
+            <p>Den Vorstand des Vereins „Wertacher Mühle, Sonnenhof e.V.“</p>
+            <p class="hint">
+              Hinweis: Bitte hier die vertretungsberechtigten Vorstandsmitglieder mit
+              Namen sowie das zuständige Registergericht und die Vereinsregisternummer
+              eintragen.
+            </p>
+            <h4>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h4>
+            <p class="hint">
+              Hinweis: Bitte hier die inhaltlich verantwortliche Person mit Name und
+              Anschrift eintragen.
+            </p>
+            <h4>Haftung für Inhalte</h4>
+            <p>
+              Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die
+              Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir
+              jedoch keine Gewähr übernehmen.
+            </p>
+            <h4>Haftung für Links</h4>
+            <p>
+              Unser Angebot enthält Links zu externen Websites Dritter, auf deren
+              Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden
+              Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten
+              Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten
+              verantwortlich.
+            </p>
+            <h4>Urheberrecht</h4>
+            <p>
+              Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen
+              Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung,
+              Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der
+              Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des
+              jeweiligen Autors bzw. Erstellers.
+            </p>
+          </div>
+        </details>
+
+        <details id="datenschutz">
+          <summary>Datenschutzerklärung</summary>
+          <div class="prose">
+            <h4>1. Verantwortliche Stelle</h4>
+            <p>
+              Wertacher Mühle, Sonnenhof e.V.<br>
+              Vorderschneid 7<br>
+              87497 Wertach<br>
+              Telefon: 08365 / 1628<br>
+              E-Mail: Wertachermuehle@web.de
+            </p>
+            <h4>2. Allgemeines zur Datenverarbeitung</h4>
+            <p>
+              Der Schutz Ihrer persönlichen Daten ist uns wichtig. Diese Website kommt
+              ohne Cookies, ohne Tracking und ohne Analyse-Dienste aus. Es werden
+              keine externen Schriftarten oder Inhalte von Drittservern eingebunden.
+            </p>
+            <h4>3. Server-Logdateien</h4>
+            <p>
+              Beim Aufruf dieser Website erhebt der Hosting-Anbieter automatisch
+              Informationen in sogenannten Server-Logdateien, die Ihr Browser
+              übermittelt (z.&nbsp;B. IP-Adresse, Datum und Uhrzeit der Anfrage,
+              Browsertyp). Diese Daten dienen der Sicherstellung eines störungsfreien
+              Betriebs und werden nach kurzer Zeit gelöscht. Rechtsgrundlage ist
+              Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;f DSGVO.
+            </p>
+            <p class="hint">
+              Hinweis: Bitte hier den tatsächlichen Hosting-Anbieter mit Name und
+              Anschrift ergänzen und ggf. einen Auftragsverarbeitungsvertrag abschließen.
+            </p>
+            <h4>4. Kontaktaufnahme</h4>
+            <p>
+              Wenn Sie uns per E-Mail oder Telefon kontaktieren, werden Ihre Angaben
+              zur Bearbeitung der Anfrage und für mögliche Anschlussfragen bei uns
+              gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+              Rechtsgrundlage ist Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;b DSGVO (Anbahnung
+              bzw. Durchführung eines Vertrags) sowie Art.&nbsp;6 Abs.&nbsp;1
+              lit.&nbsp;f DSGVO.
+            </p>
+            <h4>5. Externe Links</h4>
+            <p>
+              Diese Website verlinkt auf externe Angebote (z.&nbsp;B. Instagram,
+              Facebook). Beim Anklicken dieser Links verlassen Sie unsere Website;
+              es gelten die Datenschutzbestimmungen der jeweiligen Anbieter.
+            </p>
+            <h4>6. Ihre Rechte</h4>
+            <p>Sie haben im Rahmen der DSGVO folgende Rechte:</p>
+            <ul>
+              <li>Auskunft über Ihre bei uns gespeicherten Daten (Art. 15 DSGVO)</li>
+              <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+              <li>Löschung Ihrer Daten (Art. 17 DSGVO)</li>
+              <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+              <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+              <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+              <li>Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO)</li>
+            </ul>
+            <p>
+              Zuständige Aufsichtsbehörde ist das Bayerische Landesamt für
+              Datenschutzaufsicht (BayLDA), Promenade 18, 91522 Ansbach.
+            </p>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-mark">Wertacher Mühle</p>
+      <div class="footer-grid">
+        <div>
+          <h4>Anschrift</h4>
+          <p>
+            Wertacher Mühle, Sonnenhof e.V.<br>
+            Vorderschneid 7<br>
+            87497 Wertach (im Allgäu)<br>
+            <a href="tel:+4983651628">08365 / 1628</a><br>
+            <a href="mailto:Wertachermuehle@web.de">Wertachermuehle@web.de</a>
+          </p>
+        </div>
+        <div>
+          <h4>Abschnitte</h4>
+          <ul>
+            <li><a href="#muehle">Die Mühle</a></li>
+            <li><a href="#haus">Das Haus</a></li>
+            <li><a href="#singleeltern">Urlaub für Singleeltern</a></li>
+            <li><a href="#gruppen">Gruppen</a></li>
+            <li><a href="#schulklassen">Schulklassen</a></li>
+            <li><a href="#kontakt">Kontakt &amp; Anfahrt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Mühlesocial</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/wertacher_muehle" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://www.facebook.com/wertachermuehle" target="_blank" rel="noopener">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-note">
+        <span>© 2026 Wertacher Mühle, Sonnenhof e.V.</span>
+        <span><a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // Kennzeichnen, dass JavaScript läuft – erst dann werden .reveal-Elemente
+  // ausgeblendet (ohne JS bleibt alles sichtbar).
+  document.documentElement.classList.add('js');
+
+  var header = document.querySelector('.site-header');
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.main-nav');
+
+  // Mobile-Navigation
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    header.classList.toggle('nav-open', open);
+  }
+
+  toggle.addEventListener('click', function () {
+    setOpen(!nav.classList.contains('open'));
+  });
+
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  // Kopfzeile beim Scrollen dunkel hinterlegen
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 24);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Aktiven Menüpunkt beim Scrollen markieren
+  var links = Array.prototype.slice.call(document.querySelectorAll('.main-nav a[href^="#"]'));
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove('active'); });
+          var link = byId[entry.target.id];
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    Object.keys(byId).forEach(function (id) {
+      var section = document.getElementById(id);
+      if (section) spy.observe(section);
+    });
+  }
+
+  // Rechtstexte aufklappen, wenn sie per Link (#impressum/#datenschutz) angesteuert werden
+  function openLegal() {
+    if (!location.hash) return;
+    var el = document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  }
+  window.addEventListener('hashchange', openLegal);
+  openLegal();
+
+  // Sanftes Einblenden beim Scrollen
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && reveals.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('visible'); });
+  }
+  </script>
+</body>
+</html>

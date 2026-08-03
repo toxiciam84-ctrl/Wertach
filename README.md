@@ -15,7 +15,6 @@ Moderne, statische Website für die **Wertacher Mühle, Sonnenhof e.V.** in
 | `schulklassen.html` | Klassenfahrten |
 | `ihr-bei-uns.html` | Kontakt & Anfahrt |
 | `impressum.html` / `datenschutz.html` | Rechtstexte (Platzhalter bitte prüfen und vervollständigen) |
-| `wertacher-muehle.html` | **Die komplette Website als eine einzige Datei** – alle Inhalte, Bilder und Schriften eingebettet, releasefähig und offline nutzbar |
 
 ## Technik
 
@@ -27,22 +26,6 @@ Moderne, statische Website für die **Wertacher Mühle, Sonnenhof e.V.** in
 - Responsiv mit mobiler Navigation, sanften Scroll-Animationen
   (respektiert `prefers-reduced-motion`).
 - Bilder stammen von der bisherigen Website (`images/`).
-
-## Einzeldatei-Version
-
-`wertacher-muehle.html` enthält die gesamte Website (inklusive Impressum und
-Datenschutz als aufklappbare Abschnitte) in einer einzigen Datei: Bilder sind
-verkleinert und als Data-URIs eingebettet, die Schriften ebenfalls. Die Datei
-kann direkt im Browser geöffnet oder einzeln auf einen Webspace gelegt werden.
-
-Neu erzeugen (nach Änderungen an Inhalten oder Bildern):
-
-```sh
-pip install Pillow
-python3 tools/build-einzeldatei.py
-```
-
-Vorlage: `tools/einzeldatei-vorlage.html`.
 
 ## Lokal ansehen
 

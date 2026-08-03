@@ -208,43 +208,6 @@ p + p { margin-top: 1.1em; }
 
 .muted { color: var(--muted); }
 
-.kicker-row {
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-  margin-bottom: clamp(1.6rem, 3.5vw, 2.4rem);
-}
-
-.kicker-row .no {
-  font-family: var(--display);
-  font-weight: 350;
-  font-size: 0.95rem;
-  color: var(--oxblood);
-  flex: none;
-}
-
-.kicker-row .label {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--muted);
-  flex: none;
-}
-
-.kicker-row::after {
-  content: "";
-  height: 1px;
-  background: var(--line);
-  flex: 1;
-}
-
-/* Helle Varianten auf dunklen Bändern */
-
-.band-dark .kicker-row .label { color: rgba(255, 255, 255, 0.6); }
-.band-dark .kicker-row .no { color: #d9a24a; }
-.band-dark .kicker-row::after { background: rgba(255, 255, 255, 0.2); }
-
 /* --------------------------------------------------------------------------
    Vollbild-Hero
    -------------------------------------------------------------------------- */
@@ -314,12 +277,10 @@ p + p { margin-top: 1.1em; }
    -------------------------------------------------------------------------- */
 
 figcaption {
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 0.88rem;
+  font-style: italic;
   color: var(--muted);
-  margin-top: 0.8rem;
+  margin-top: 0.7rem;
 }
 
 .band-dark figcaption { color: rgba(255, 255, 255, 0.6); }
@@ -344,10 +305,7 @@ figure.frame img,
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 1.4rem;
-  counter-reset: photo;
 }
-
-.photo-row figure { counter-increment: photo; }
 
 .photo-row figure > span {
   display: block;
@@ -361,11 +319,6 @@ figure.frame img,
 }
 
 .photo-row figure:hover img { transform: scale(1.05); }
-
-.photo-row figcaption::before {
-  content: counter(photo, decimal-leading-zero) "  ·  ";
-  color: var(--oxblood);
-}
 
 @media (max-width: 680px) {
   .photo-row { grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -630,12 +583,6 @@ figure.frame img,
   color: rgba(246, 243, 236, 0.7);
   font-size: 1.05rem;
 }
-
-.page-head .kicker-row { margin-bottom: 1.6rem; }
-
-.page-head .kicker-row .label { color: #d9a24a; }
-
-.page-head .kicker-row::after { background: rgba(246, 243, 236, 0.2); }
 
 /* Rechtstexte */
 

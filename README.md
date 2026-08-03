@@ -23,8 +23,7 @@ Moderne, statische Website für die **Wertacher Mühle, Sonnenhof e.V.** in
 - DSGVO-freundlich: keine Cookies, kein Tracking, keine externen Font-Server –
   die Schriften Fraunces und Inter (Open-Source, SIL OFL) liegen lokal
   in `fonts/`.
-- Responsiv mit mobiler Navigation, sanften Scroll-Animationen
-  (respektiert `prefers-reduced-motion`).
+- Responsiv mit mobiler Navigation.
 - Bilder stammen von der bisherigen Website (`images/`).
 
 ## Lokal ansehen

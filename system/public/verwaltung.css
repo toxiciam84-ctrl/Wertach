@@ -1,0 +1,242 @@
+/* Verwaltungs-Dashboard – funktional, ruhig, in den Farben der Mühle */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/inter-var.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url("/fonts/fraunces-var.woff2") format("woff2");
+}
+
+:root {
+  --paper: #f4f0e6;
+  --ink: #211f19;
+  --muted: #6f695a;
+  --oxblood: #6e2028;
+  --green: #2c4434;
+  --green-deep: #1f3126;
+  --line: #d9d0bc;
+  --cream: #fbf9f4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+a { color: var(--oxblood); }
+
+/* Kopf */
+
+.kopf {
+  background: var(--green-deep);
+  color: #f6f3ec;
+  padding: 0.9rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.kopf .marke { font-family: "Fraunces", serif; font-size: 1.15rem; }
+
+.kopf nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+
+.kopf nav a {
+  color: rgba(246, 243, 236, 0.85);
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid transparent;
+}
+
+.kopf nav a:hover, .kopf nav a.aktiv { color: #fff; border-bottom-color: #d9a24a; }
+
+main { max-width: 1200px; margin: 0 auto; padding: 1.8rem 1.6rem 4rem; }
+
+h1 { font-family: "Fraunces", serif; font-weight: 400; font-size: 1.9rem; margin-bottom: 1.2rem; }
+
+h2 { font-family: "Fraunces", serif; font-weight: 500; font-size: 1.2rem; margin: 1.4rem 0 0.7rem; }
+
+h3 { font-size: 0.95rem; margin: 1.2rem 0 0.4rem; }
+
+.meldung {
+  background: #e8efe6;
+  border-left: 3px solid var(--green);
+  padding: 0.7rem 1rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Kacheln */
+
+.kacheln { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+
+.kachel { background: var(--cream); border: 1px solid var(--line); padding: 1rem 1.2rem; }
+
+.kachel .zahl { font-family: "Fraunces", serif; font-size: 1.9rem; font-weight: 300; }
+
+.kachel .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+
+/* Tabellen */
+
+table { width: 100%; border-collapse: collapse; background: var(--cream); border: 1px solid var(--line); }
+
+th, td { text-align: left; padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+
+th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+
+tr:last-child td { border-bottom: none; }
+
+/* Status-Chips */
+
+.chip {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 2px;
+  border: 1px solid currentColor;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.chip-angefragt { color: #8a6d1a; background: #f5edd2; }
+.chip-bestaetigt { color: var(--green); background: #e4ecdf; }
+.chip-bezahlt { color: #1d4f36; background: #d9ead9; }
+.chip-abgeschlossen { color: var(--muted); background: #eceadf; }
+.chip-storniert { color: var(--oxblood); background: #f3dede; }
+
+/* Karten & Formulare */
+
+.spalten { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: start; }
+
+@media (max-width: 900px) { .spalten { grid-template-columns: 1fr; } }
+
+.karte { background: var(--cream); border: 1px solid var(--line); padding: 1.2rem 1.4rem; margin-bottom: 1.2rem; }
+
+.karte h2:first-child { margin-top: 0; }
+
+label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem; }
+
+label.zeile { display: flex; align-items: center; gap: 0.5rem; }
+
+input, textarea, select {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+label.zeile input { width: auto; margin: 0; }
+
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+
+.formzeile { display: flex; gap: 0.9rem; flex-wrap: wrap; align-items: flex-end; }
+
+.formzeile label { flex: 1; min-width: 140px; }
+
+.knopf {
+  font: inherit;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  padding: 0.55rem 1.2rem;
+  background: var(--green-deep);
+  color: #f6f3ec;
+  border: none;
+  cursor: pointer;
+}
+
+.knopf:hover { background: var(--green); }
+
+.knopf.klein-knopf { padding: 0.3rem 0.7rem; font-size: 0.75rem; }
+
+.knopf.rot { background: var(--oxblood); }
+
+.knopfleiste { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0.6rem 0 1rem; }
+
+.inline { display: inline; }
+
+.klein { font-size: 0.8rem; color: var(--muted); }
+
+.liste { list-style: none; }
+
+.liste li { padding: 0.3rem 0; border-bottom: 1px solid var(--line); }
+
+.liste li:last-child { border-bottom: none; }
+
+.tabs { display: flex; gap: 0.4rem; margin-bottom: 1rem; flex-wrap: wrap; }
+
+.tab {
+  text-decoration: none;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 0.3rem 0.9rem;
+  font-size: 0.82rem;
+  background: var(--cream);
+}
+
+.tab.aktiv { background: var(--green-deep); color: #fff; border-color: var(--green-deep); }
+
+/* Baukasten */
+
+.block-karte .block-kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.mini-vorschau { max-width: 140px; max-height: 90px; object-fit: cover; border: 1px solid var(--line); margin: -0.4rem 0 0.8rem; }
+
+/* Anmeldung */
+
+body.anmeldung {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background: var(--green-deep);
+}
+
+.anmelde-karte {
+  background: var(--paper);
+  padding: 2.2rem 2.4rem;
+  width: min(380px, 92vw);
+}
+
+.anmelde-karte h1 { font-family: "Fraunces", serif; font-weight: 400; font-size: 1.5rem; }
+
+.anmelde-karte .hinweis { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.2rem; }
+
+.anmelde-karte .fehler { color: var(--oxblood); font-size: 0.85rem; margin-bottom: 0.8rem; }
+
+.anmelde-karte button {
+  font: inherit;
+  width: 100%;
+  padding: 0.7rem;
+  background: var(--green-deep);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.4rem;
+}

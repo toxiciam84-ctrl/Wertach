@@ -43,6 +43,38 @@ npm install
 npm run build
 ```
 
+## Komplettsystem: Buchung, Dashboard & Baukasten (`system/`)
+
+Im Ordner `system/` liegt das Node.js-Komplettsystem:
+
+- **Online-Buchung** auf der Website: Ferienwochen mit Platzverwaltung und
+  Bezahlung (Stripe; ohne Stripe-Schlüssel automatisch per Überweisung),
+  dazu Gruppen-/Schulklassen-Anfragen mit Wunschzeitraum.
+- **Dashboard** unter `/verwaltung`: Buchungen mit Status-Verwaltung,
+  E-Mail-Versand, automatische Rechnungs-PDFs mit fortlaufender Nummer,
+  Getränke-/Extras-Abrechnung pro Aufenthalt (Ein-Klick-Strichliste).
+- **Website-Baukasten**: alle Seiten und Blöcke bearbeiten, hinzufügen,
+  verschieben, entfernen; Bilder hochladen; neue Seiten anlegen. Die
+  öffentliche Website wird daraus im bekannten Design gerendert.
+
+Starten:
+
+```sh
+cd system
+npm install
+npm start          # http://localhost:3000  ·  Dashboard: /verwaltung
+```
+
+Erster Zugang: `verwaltung@wertachermuehle.de` / `muehle2026` –
+**Passwort nach dem ersten Anmelden ändern** (Einstellungen).
+E-Mail-Versand (SMTP) und Online-Zahlung (Stripe) werden in `system/.env`
+eingetragen (Vorlage: `system/.env.beispiel`); ohne diese Zugänge landen
+E-Mails im Postausgang des Dashboards und Buchungen laufen per Überweisung.
+Vor dem Echtbetrieb außerdem: IBAN in den Einstellungen hinterlegen.
+
+Die statischen HTML-Seiten im Projektstamm bleiben als einfache Variante
+ohne Buchungssystem erhalten.
+
 ## Lokal ansehen
 
 `index.html` im Browser öffnen – oder für einen lokalen Server:

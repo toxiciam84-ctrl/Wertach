@@ -1,0 +1,88 @@
+/* Zusatz-Styles für Buchungsstrecke und Terminlisten – baut auf style.css auf */
+
+.termin-liste { display: grid; gap: 1.2rem; margin-top: 1.5rem; }
+
+.termin-karte {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  padding: 1.4rem 1.6rem;
+}
+
+.termin-karte h3 { margin-bottom: 0.3rem; }
+
+.termin-karte p { font-size: 0.95rem; max-width: 56ch; }
+
+.termin-aktion { text-align: right; flex: none; }
+
+.termin-aktion .btn-line { margin-top: 0.9rem; }
+
+.frei {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  border: 1px solid currentColor;
+  padding: 0.3rem 0.8rem;
+}
+
+.frei.voll { color: var(--oxblood); }
+
+/* Formulare (Buchung, Anfrage) */
+
+.formular { display: grid; gap: 1.1rem; margin-top: 0.5rem; }
+
+.formular label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.formular input,
+.formular textarea,
+.formular select {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.formular input:focus,
+.formular textarea:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+}
+
+.formular .feld-reihe {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+@media (max-width: 560px) {
+  .formular .feld-reihe { grid-template-columns: 1fr; }
+}
+
+.formular button.btn-line { justify-self: start; cursor: pointer; background: none; }
+
+.formular-fehler {
+  border-left: 3px solid var(--oxblood);
+  padding: 0.6rem 1rem;
+  background: rgba(110, 32, 40, 0.08);
+  margin-bottom: 1.2rem;
+}
+
+.klein { font-size: 0.85rem; }

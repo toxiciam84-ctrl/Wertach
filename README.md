@@ -18,13 +18,30 @@ Moderne, statische Website für die **Wertacher Mühle, Sonnenhof e.V.** in
 
 ## Technik
 
-- Reines HTML/CSS/JS, kein Build-Schritt und keine externen Abhängigkeiten –
-  einfach den Ordner auf einen beliebigen Webspace hochladen.
-- DSGVO-freundlich: keine Cookies, kein Tracking, keine externen Font-Server –
-  die Schriften Fraunces und Inter (Open-Source, SIL OFL) liegen lokal
-  in `fonts/`.
+- Statisches HTML/CSS/JS – einfach den Ordner auf einen beliebigen Webspace
+  hochladen (der Ordner `animationen/` wird auf dem Server nicht benötigt).
+- DSGVO-freundlich: keine Cookies, kein Tracking, keine externen Server –
+  die Schriften Fraunces und Inter (Open-Source, SIL OFL) liegen lokal in
+  `fonts/`, das Animations-Bundle lokal in `js/`.
 - Responsiv mit mobiler Navigation.
 - Bilder stammen von der bisherigen Website (`images/`).
+
+## Animationen (ReactBits)
+
+Die Animationen nutzen Komponenten von [ReactBits](https://reactbits.dev)
+(MIT-Lizenz): **SplitText** für die großen Überschriften, **CountUp** für das
+Zahlenband auf der Startseite und **FadeContent** für das weiche Einblenden
+der Bilder. Sie sind als ein lokales Bundle (`js/reactbits-animationen.js`)
+eingebunden – ohne CDN. Ohne JavaScript oder bei aktiviertem
+`prefers-reduced-motion` bleibt die Seite komplett statisch und lesbar.
+
+Bundle neu bauen (nach Änderungen in `animationen/src/`):
+
+```sh
+cd animationen
+npm install
+npm run build
+```
 
 ## Lokal ansehen
 

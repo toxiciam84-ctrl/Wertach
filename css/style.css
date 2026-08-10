@@ -202,7 +202,10 @@ p + p { margin-top: 1.1em; }
 
 .hero-full {
   position: relative;
-  min-height: min(92vh, 900px);
+  /* Füllt den Bildschirm komplett – kein heller Streifen am unteren Rand.
+     dvh berücksichtigt die ein- und ausfahrende Leiste mobiler Browser. */
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: flex-end;
   color: #fff;

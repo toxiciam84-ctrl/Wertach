@@ -86,3 +86,12 @@
 }
 
 .klein { font-size: 0.85rem; }
+
+/* Spam-Falle: für Menschen unsichtbar, für Bots verlockend */
+.spamfalle {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

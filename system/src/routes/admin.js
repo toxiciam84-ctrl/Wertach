@@ -8,9 +8,12 @@ const { db, einstellung, setzeEinstellung, DATA_DIR } = require('../db');
 const { esc, BLOCK_TYPEN } = require('../render');
 const { sende } = require('../mail');
 const { rechnungFuerBuchung, euro, datumSchoen } = require('../buchungsHilfe');
+const { csrfSchutz, bremse, bremseZuruecksetzen } = require('../sicherheit');
+const { sicherungAnlegen, sicherungenAuflisten } = require('../sicherung');
 
 const router = express.Router();
 router.use(express.urlencoded({ extended: false }));
+router.use(csrfSchutz);
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -91,9 +94,18 @@ router.get('/anmelden', (req, res) => {
     </form></body></html>`);
 });
 
-router.post('/anmelden', (req, res) => {
+// Höchstens 8 Anmeldeversuche in 15 Minuten – bremst das Raten von Passwörtern
+const anmeldeBremse = bremse({
+  versuche: 8,
+  fensterMinuten: 15,
+  name: 'anmeldung',
+  hinweis: 'Zu viele Anmeldeversuche.'
+});
+
+router.post('/anmelden', anmeldeBremse, (req, res) => {
   const admin = db.prepare('SELECT * FROM admins WHERE email = ?').get(String(req.body.email || '').trim());
   if (admin && bcrypt.compareSync(String(req.body.passwort || ''), admin.pass_hash)) {
+    bremseZuruecksetzen('anmeldung', req);
     req.session.adminId = admin.id;
     return res.redirect('/verwaltung');
   }
@@ -774,6 +786,16 @@ router.get('/einstellungen', (req, res) => {
           </ul>
           <p class="klein">Beides wird in der Datei <code>.env</code> auf dem Server eingetragen (Vorlage: <code>.env.beispiel</code>).</p>
         </div>
+
+        <div class="karte">
+          <h2>Datensicherung</h2>
+          <p class="klein">Die Datenbank wird beim Start und danach täglich automatisch gesichert; die letzten 14 Sicherungen bleiben erhalten. Bewahrt zusätzlich regelmäßig eine Kopie außerhalb des Servers auf.</p>
+          <form method="post" action="/verwaltung/einstellungen/sicherung">
+            <button class="knopf">Jetzt sichern</button>
+          </form>
+          <ul class="liste">${sicherungenAuflisten().slice(0, 5).map(s =>
+            `<li>${esc(s.zeit)} <span class="klein">(${Math.round(s.groesse / 1024)} KB)</span></li>`).join('') || '<li>Noch keine Sicherung vorhanden.</li>'}</ul>
+        </div>
       </div>
     </div>`));
 });
@@ -783,6 +805,16 @@ router.post('/einstellungen', (req, res) => {
     if (req.body[schluessel] != null) setzeEinstellung(schluessel, String(req.body[schluessel]));
   }
   req.session.meldung = 'Einstellungen gespeichert.';
+  res.redirect('/verwaltung/einstellungen');
+});
+
+router.post('/einstellungen/sicherung', async (req, res) => {
+  try {
+    await sicherungAnlegen();
+    req.session.meldung = 'Sicherung angelegt.';
+  } catch (e) {
+    req.session.meldung = 'Sicherung fehlgeschlagen: ' + e.message;
+  }
   res.redirect('/verwaltung/einstellungen');
 });
 

@@ -19,6 +19,11 @@ const { einstellung, setzeEinstellung, DATA_DIR } = require('./src/db');
 const app = express();
 app.disable('x-powered-by');
 
+// Hinter einem HTTPS-Proxy (Live-Betrieb): echte Besucher-IP erkennen und
+// Sitzungs-Cookies nur verschlüsselt übertragen.
+const hinterHttps = String(process.env.BASIS_URL || '').startsWith('https');
+if (hinterHttps) app.set('trust proxy', 1);
+
 // Sitzungs-Schlüssel beim ersten Start erzeugen und behalten
 let geheim = einstellung('session_geheim');
 if (!geheim) {
@@ -30,6 +35,7 @@ app.use(cookieSession({
   secret: geheim,
   httpOnly: true,
   sameSite: 'lax',
+  secure: hinterHttps,
   maxAge: 12 * 60 * 60 * 1000
 }));
 
@@ -51,6 +57,9 @@ app.use('/verwaltung', adminRouter);
 app.use('/', publicRouter);
 
 app.use((req, res) => res.status(404).send('Seite nicht gefunden – <a href="/">zur Startseite</a>'));
+
+// Tägliche Sicherung der Datenbank
+require('./src/sicherung').sicherungenStarten(24);
 
 const port = parseInt(process.env.PORT || '3000', 10);
 app.listen(port, () => {

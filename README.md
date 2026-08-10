@@ -65,6 +65,19 @@ npm install
 npm start          # http://localhost:3000  ·  Dashboard: /verwaltung
 ```
 
+**Schutzfunktionen** (aktiv, ohne Konfiguration):
+
+- CSRF-Schutz für alle Dashboard-Formulare
+- Anmeldebremse: höchstens 8 Versuche in 15 Minuten je Anschluss
+- Spam-Falle und Bremse (12 Absendungen/Stunde) an den öffentlichen Formularen
+- Doppelbuchungen ausgeschlossen: Platzprüfung und Eintrag laufen in einer
+  Transaktion
+- Automatische Datensicherung beim Start und täglich nach
+  `system/data/sicherungen/` (die letzten 14 bleiben erhalten); zusätzlich
+  regelmäßig eine Kopie außerhalb des Servers aufbewahren
+- Sitzungs-Cookies werden automatisch auf „nur über HTTPS“ gestellt, sobald
+  `BASIS_URL` in der `.env` mit `https://` beginnt
+
 Erster Zugang: `verwaltung@wertachermuehle.de` / `muehle2026` –
 **Passwort nach dem ersten Anmelden ändern** (Einstellungen).
 E-Mail-Versand (SMTP) und Online-Zahlung (Stripe) werden in `system/.env`

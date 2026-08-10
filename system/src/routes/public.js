@@ -3,6 +3,16 @@ const express = require('express');
 const { db, naechsteNummer, einstellung } = require('../db');
 const { renderSeite, seitenGeruest, esc, euro, datumSchoen } = require('../render');
 const { sende } = require('../mail');
+const { bremse, spamFalle, istSpam } = require('../sicherheit');
+
+// Höchstens 12 Absendungen pro Stunde je Anschluss – hält Bot-Fluten fern,
+// ohne echte Gäste zu behindern (Familien im selben Netz eingeschlossen).
+const formularBremse = bremse({
+  versuche: 12,
+  fensterMinuten: 60,
+  name: 'formular',
+  hinweis: 'Es wurden zu viele Formulare abgeschickt.'
+});
 
 const router = express.Router();
 
@@ -101,6 +111,7 @@ function buchungsFormular(termin, fehler = '', werte = {}) {
         <label>Straße und Hausnummer<input type="text" name="strasse" value="${w('strasse')}" required></label>
         <label>PLZ und Ort<input type="text" name="plz_ort" value="${w('plz_ort')}" required></label>
         <label>Nachricht an uns (optional)<textarea name="nachricht" rows="4">${w('nachricht')}</textarea></label>
+        ${spamFalle()}
         <p class="muted klein">Mit dem Absenden stimmt ihr der Verarbeitung eurer Daten zur Abwicklung der Buchung zu (siehe <a href="/datenschutz">Datenschutz</a>).</p>
         <button class="btn-line" type="submit">${stripe ? 'Weiter zur Bezahlung' : 'Verbindlich buchen (Zahlung per Überweisung)'}</button>
       </form>
@@ -116,7 +127,25 @@ router.get('/buchen/:id', (req, res) => {
   }));
 });
 
-router.post('/buchen/:id', express.urlencoded({ extended: false }), async (req, res) => {
+// Platzprüfung und Eintrag laufen in einem Zug (Transaktion). Ohne das
+// könnten zwei gleichzeitige Buchungen denselben letzten Platz belegen.
+const buchungAnlegen = db.transaction((termin, d) => {
+  const belegt = db.prepare(
+    "SELECT COALESCE(SUM(erwachsene + kinder), 0) AS n FROM buchungen WHERE termin_id = ? AND status IN ('angefragt','bestaetigt','bezahlt')"
+  ).get(termin.id).n;
+  if (d.erwachsene + d.kinder > Math.max(0, termin.plaetze - belegt)) {
+    throw new Error('KEINE_PLAETZE');
+  }
+  const nummer = naechsteNummer('buchung');
+  const info = db.prepare(
+    `INSERT INTO buchungen (nummer, termin_id, status, name, email, telefon, strasse, plz_ort, erwachsene, kinder, nachricht, betrag, zahlart)
+     VALUES (?, ?, 'angefragt', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+  ).run(nummer, termin.id, d.name, d.email, d.telefon, d.strasse, d.plz_ort,
+    d.erwachsene, d.kinder, d.nachricht, d.betrag, d.zahlart);
+  return { id: info.lastInsertRowid, nummer };
+});
+
+router.post('/buchen/:id', express.urlencoded({ extended: false }), formularBremse, async (req, res) => {
   const termin = db.prepare('SELECT * FROM termine WHERE id = ? AND buchbar = 1').get(req.params.id);
   if (!termin) return res.redirect('/buchen');
 
@@ -130,18 +159,30 @@ router.post('/buchen/:id', express.urlencoded({ extended: false }), async (req, 
     inhalt: buchungsFormular(termin, fehler, req.body), mitHero: false
   }));
 
+  // Spam-Falle: Bots füllen das unsichtbare Feld aus – still verwerfen.
+  if (istSpam(req)) return res.redirect('/buchen');
+
   if (!name || !email.includes('@')) return zeige('Bitte Name und eine gültige E-Mail-Adresse angeben.');
-  if (erwachsene + kinder > freiePlaetze(termin)) return zeige('So viele Plätze sind leider nicht mehr frei.');
 
   const betrag = preisFuer(termin, erwachsene, kinder);
-  const nummer = naechsteNummer('buchung');
-  const info = db.prepare(
-    `INSERT INTO buchungen (nummer, termin_id, status, name, email, telefon, strasse, plz_ort, erwachsene, kinder, nachricht, betrag, zahlart)
-     VALUES (?, ?, 'angefragt', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-  ).run(nummer, termin.id, name, email, String(req.body.telefon || ''), String(req.body.strasse || ''),
-    String(req.body.plz_ort || ''), erwachsene, kinder, String(req.body.nachricht || ''), betrag,
-    stripe ? 'karte' : 'ueberweisung');
-  const buchungId = info.lastInsertRowid;
+  let neu;
+  try {
+    neu = buchungAnlegen(termin, {
+      name, email, betrag, erwachsene, kinder,
+      telefon: String(req.body.telefon || ''),
+      strasse: String(req.body.strasse || ''),
+      plz_ort: String(req.body.plz_ort || ''),
+      nachricht: String(req.body.nachricht || ''),
+      zahlart: stripe ? 'karte' : 'ueberweisung'
+    });
+  } catch (e) {
+    if (e.message === 'KEINE_PLAETZE') {
+      return zeige('So viele Plätze sind leider nicht mehr frei. Bitte passt die Personenzahl an oder meldet euch direkt bei uns.');
+    }
+    throw e;
+  }
+  const nummer = neu.nummer;
+  const buchungId = neu.id;
 
   if (stripe) {
     try {
@@ -294,15 +335,17 @@ function anfrageFormular(fehler = '', werte = {}) {
         <label>E-Mail<input type="email" name="email" value="${w('email')}" required></label>
         <label>Telefon<input type="tel" name="telefon" value="${w('telefon')}"></label>
         <label>Was habt ihr vor?<textarea name="nachricht" rows="5" placeholder="z. B. Klassenfahrt 7. Klasse, Chorwochenende, Familienfreizeit …">${w('nachricht')}</textarea></label>
+        ${spamFalle()}
         <p class="muted klein">Mit dem Absenden stimmt ihr der Verarbeitung eurer Daten zur Bearbeitung der Anfrage zu (siehe <a href="/datenschutz">Datenschutz</a>).</p>
         <button class="btn-line" type="submit">Anfrage senden</button>
       </form>
     </div></div></section>`;
 }
 
-router.post('/anfrage', express.urlencoded({ extended: false }), async (req, res) => {
+router.post('/anfrage', express.urlencoded({ extended: false }), formularBremse, async (req, res) => {
   const name = String(req.body.name || '').trim();
   const email = String(req.body.email || '').trim();
+  if (istSpam(req)) return res.redirect('/anfrage');
   if (!name || !email.includes('@')) {
     return res.send(seitenGeruest({
       slug: 'buchen', titel: 'Gruppenanfrage | Wertacher Mühle', beschreibung: '',
